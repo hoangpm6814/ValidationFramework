@@ -26,22 +26,18 @@ public class MessageLabelFactory implements MessageFactory {
         this.label = label;
     }
 
-    @Override
     public ValidationRuleNotNull createNotNullRule(String input, String message) {
         return new ValidationLabelNotNull (label, input, message );
     }
 
-    @Override
     public ValidationRuleMaximum createMaximumRule(Comparable input, Comparable limiter, String message) {
         return new ValidationLabelMaximum (label, input, limiter, message );
     }
 
-    @Override
     public ValidationRuleMinimum createMinimumRule(Comparable input, Comparable limiter, String message) {
         return new ValidationLabelMinimum (label, input, limiter, message );
     }
 
-    @Override
     public ValidationRulePattern createPatternRule(String input, String pattern, String message) {
         return new ValidationLabelPattern(label, input, pattern, message);
     }

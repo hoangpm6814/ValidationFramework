@@ -3,7 +3,6 @@ package validationframework.customPattern;
 public enum EmailValidationPattern implements ValidationPatterns {
     simple, standard;
 
-    @Override
     public String getPattern() {
         switch (this){
             case simple:

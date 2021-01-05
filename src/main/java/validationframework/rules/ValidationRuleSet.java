@@ -12,9 +12,9 @@ public class ValidationRuleSet implements ValidationRuleInterface{
         this.ruleSet = ruleSet;
     }
     public ValidationRuleSet(){
-        ruleSet = new ArrayList <>();
+        ruleSet = new ArrayList();
     }
-    @Override
+
     public ValidationResult validate() {
         for (int i = 0 ; i < ruleSet.size(); i++){
             if (ruleSet.get(i).validate() == inValid){
@@ -32,7 +32,7 @@ public class ValidationRuleSet implements ValidationRuleInterface{
         }
         return message;
     }
-    @Override
+
     public void showMessage(){
         for (int i = 0 ; i < ruleSet.size(); i++){
             ruleSet.get(i).showMessage();

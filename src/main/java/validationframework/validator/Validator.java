@@ -6,12 +6,11 @@ import validationframework.rules.ValidationRuleInterface;
 
 public class Validator implements ValidatorInterface{
     private ValidationRuleInterface validationRule;
-    
-    @Override
+
     public void showMessage (){
         validationRule.showMessage();
     }
-    @Override
+
     public ValidationResult validate (){
         return validationRule.validate();
     }
