@@ -40,16 +40,16 @@ import validationframework.rules.notNull.ValidationRuleNotNull;
 import validationframework.rules.pattern.ValidationRulePattern;
 import validationframework.validator.Validator;
 
-public class RegisterForm extends JFrame {
+public class RegisterForm111 extends JFrame {
 
     public JPanel contentPane;
-    
+
     private JTextField txtUsername;
     private JTextField txtEmail;
     private JPasswordField txtPassword;
     private JTextField txtPhone;
     private JDateChooser txtDate;
-    
+
     public JLabel lblValidateUsername;
     public JLabel lblValidatePhone;
     private JLabel lblValidatePassword;
@@ -62,20 +62,20 @@ public class RegisterForm extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                RegisterForm frame = new RegisterForm();
+                RegisterForm111 frame = new RegisterForm111();
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
-    
+
     public void validateInput(){
         SimpleDateFormat dcn = new SimpleDateFormat("dd/MM/yyyy");
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         String phone  = txtPhone.getText();
-        
+
         String birthDateAsbirtString = ((JTextField)txtDate.getDateEditor().getUiComponent()).getText();
         Date birthDate = (!"".equals(birthDateAsbirtString)) ? txtDate.getDate() : (new Date());
         String email = txtEmail.getText();
@@ -84,19 +84,19 @@ public class RegisterForm extends JFrame {
         ValidationRuleNotNull notNullRule = messageUsernameFactory.createNotNullRule(username, "Username cannot be null");
         Validator usernameValidator = new Validator (notNullRule);
         usernameValidator.showMessage();
-        
+
         //Validate password
         MessageLabelFactory messagePasswordFactory = new MessageLabelFactory(lblValidatePassword);
         ValidationRulePattern passwordLengthRule = messagePasswordFactory.createPatternRule(password,"\\b\\w{5,10}\\b", "Password must be longer than 4 characters and less than 10 characters");
         Validator passwordValidator = new Validator (passwordLengthRule);
         passwordValidator.showMessage();
-        
+
         // Validate email
         MessageLabelFactory messageEmailFactory = new MessageLabelFactory(lblValidateEmail);
         ValidationRulePattern emailRule = messageEmailFactory.createPatternRule(email, EmailValidationPattern.simple.getPattern(), "Please type valid email");
         Validator emailValidator = new Validator (emailRule);
         emailValidator.showMessage();
-        
+
         // Validate phone
         MessageLabelFactory messagePhoneFactory = new MessageLabelFactory(lblValidatePhone);
         ValidationRulePattern phoneLengthRule = messagePhoneFactory.createPatternRule(phone, "\\b\\w{10,11}\\b", "Phone numbers length must be from 10 to 11 digits");
@@ -106,7 +106,7 @@ public class RegisterForm extends JFrame {
         phoneRuleSet.addRule(containNumberRule);
         Validator phoneValidator = new Validator (phoneRuleSet);
         phoneValidator.showMessage();
-        
+
         //Validate Birth date
         Date now = new Date();
         MessageLabelFactory messageBirthDateFactory = new MessageLabelFactory(lblValidateDate);
@@ -117,15 +117,15 @@ public class RegisterForm extends JFrame {
         dateRuleSet.addRule(dateMaxRule);
         Validator dateValidator = new Validator(dateRuleSet);
         dateValidator.showMessage();
-        
-        
+
+
     }
 
 
     /**
      * Create the frame.
      */
-    public RegisterForm() {
+    public RegisterForm111() {
         setResizable(false);
         setBackground(Color.WHITE);
         setTitle("Register Form");
@@ -176,11 +176,11 @@ public class RegisterForm extends JFrame {
             Date date1=new SimpleDateFormat("dd/MM/yyyy").parse("01/01/1990");
             txtDate.setDate(date1);
         } catch (ParseException ex) {
-            Logger.getLogger(RegisterForm.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegisterForm111.class.getName()).log(Level.SEVERE, null, ex);
         }
         JTextFieldDateEditor editor = (JTextFieldDateEditor) txtDate.getDateEditor();
         editor.setEnabled(false);
-        
+
         JButton btnRegister = new JButton("Register");
         btnRegister.setVerticalAlignment(JLabel.CENTER);
         btnRegister.setHorizontalAlignment(JLabel.CENTER);
@@ -198,105 +198,105 @@ public class RegisterForm extends JFrame {
                 validateInput();
             }
         });
-        
+
         lblValidatePhone = new JLabel("");
         lblValidatePhone.setForeground(Color.RED);
         lblValidatePhone.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        
+
         lblValidatePassword = new JLabel("");
         lblValidatePassword.setForeground(Color.RED);
         lblValidatePassword.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        
+
         lblValidateEmail = new JLabel("");
         lblValidateEmail.setForeground(Color.RED);
         lblValidateEmail.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        
+
         lblValidateDate = new JLabel("");
         lblValidateDate.setForeground(Color.RED);
         lblValidateDate.setFont(new Font("Tahoma", Font.PLAIN, 10));
         GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(
-        	gl_contentPane.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_contentPane.createSequentialGroup()
-        			.addGap(160)
-        			.addComponent(btnRegister, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-        			.addGap(191))
-        		.addGroup(gl_contentPane.createSequentialGroup()
-        			.addGap(185)
-        			.addComponent(lblSignUp, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-        			.addGap(184))
-        		.addGroup(gl_contentPane.createSequentialGroup()
-        			.addGap(42)
-        			.addComponent(lblValidatePhone)
-        			.addContainerGap(394, Short.MAX_VALUE))
-        		.addGroup(gl_contentPane.createSequentialGroup()
-        			.addGap(43)
-        			.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_contentPane.createSequentialGroup()
-        					.addComponent(lblValidateDate)
-        					.addContainerGap())
-        				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-        					.addGroup(gl_contentPane.createSequentialGroup()
-        						.addComponent(lblValidateEmail)
-        						.addContainerGap())
-        					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-        						.addGroup(gl_contentPane.createSequentialGroup()
-        							.addComponent(lblValidatePassword)
-        							.addContainerGap())
-        						.addGroup(gl_contentPane.createSequentialGroup()
-        							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-        								.addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-        								.addComponent(txtDate, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-        								.addComponent(lblDateOfBirth, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(lblPhoneNumber, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-        								.addComponent(lblValidateUsername)
-        								.addComponent(Username)
-        								.addComponent(txtPassword, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-        								.addComponent(txtPhone, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-        								.addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
-        							.addGap(61))))))
+                gl_contentPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                                .addGap(160)
+                                .addComponent(btnRegister, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                .addGap(191))
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                                .addGap(185)
+                                .addComponent(lblSignUp, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                                .addGap(184))
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                                .addGap(42)
+                                .addComponent(lblValidatePhone)
+                                .addContainerGap(394, Short.MAX_VALUE))
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                                .addGap(43)
+                                .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(gl_contentPane.createSequentialGroup()
+                                                .addComponent(lblValidateDate)
+                                                .addContainerGap())
+                                        .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                                                .addGroup(gl_contentPane.createSequentialGroup()
+                                                        .addComponent(lblValidateEmail)
+                                                        .addContainerGap())
+                                                .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                                                        .addGroup(gl_contentPane.createSequentialGroup()
+                                                                .addComponent(lblValidatePassword)
+                                                                .addContainerGap())
+                                                        .addGroup(gl_contentPane.createSequentialGroup()
+                                                                .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                                                                        .addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                                                                        .addComponent(txtDate, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                                                                        .addComponent(lblDateOfBirth, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(lblPhoneNumber, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(lblValidateUsername)
+                                                                        .addComponent(Username)
+                                                                        .addComponent(txtPassword, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                                                                        .addComponent(txtPhone, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                                                                        .addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
+                                                                .addGap(61))))))
         );
         gl_contentPane.setVerticalGroup(
-        	gl_contentPane.createParallelGroup(Alignment.LEADING)
-        		.addGroup(gl_contentPane.createSequentialGroup()
-        			.addGap(23)
-        			.addComponent(lblSignUp, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-        			.addGap(18)
-        			.addComponent(Username)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(lblValidateUsername)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(txtPassword, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(lblValidatePassword)
-        			.addGap(5)
-        			.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(lblValidateEmail)
-        			.addGap(5)
-        			.addComponent(lblDateOfBirth, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(txtDate, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-        			.addGap(5)
-        			.addComponent(lblValidateDate)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(lblPhoneNumber, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(txtPhone, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(lblValidatePhone)
-        			.addGap(17)
-        			.addComponent(btnRegister, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-        			.addGap(19))
+                gl_contentPane.createParallelGroup(Alignment.LEADING)
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                                .addGap(23)
+                                .addComponent(lblSignUp, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                                .addGap(18)
+                                .addComponent(Username)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(txtUsername, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(lblValidateUsername)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(txtPassword, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(lblValidatePassword)
+                                .addGap(5)
+                                .addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(lblValidateEmail)
+                                .addGap(5)
+                                .addComponent(lblDateOfBirth, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(txtDate, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                                .addGap(5)
+                                .addComponent(lblValidateDate)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(lblPhoneNumber, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(txtPhone, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(lblValidatePhone)
+                                .addGap(17)
+                                .addComponent(btnRegister, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                                .addGap(19))
         );
-    contentPane.setLayout(gl_contentPane);
+        contentPane.setLayout(gl_contentPane);
     }
 }
