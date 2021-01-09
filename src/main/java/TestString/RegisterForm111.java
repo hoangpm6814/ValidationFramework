@@ -71,14 +71,11 @@ public class RegisterForm111 extends JFrame {
     }
 
     public void validateInput(){
-        SimpleDateFormat dcn = new SimpleDateFormat("dd/MM/yyyy");
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         String phone  = txtPhone.getText();
-
-        String birthDateAsbirtString = ((JTextField)txtDate.getDateEditor().getUiComponent()).getText();
-        Date birthDate = (!"".equals(birthDateAsbirtString)) ? txtDate.getDate() : (new Date());
         String email = txtEmail.getText();
+
         //Validate username
         MessageLabelFactory messageUsernameFactory = new MessageLabelFactory(lblValidateUsername);
         ValidationRuleNotNull notNullRule = messageUsernameFactory.createNotNullRule(username, "Username cannot be null");
@@ -106,18 +103,6 @@ public class RegisterForm111 extends JFrame {
         phoneRuleSet.addRule(containNumberRule);
         Validator phoneValidator = new Validator (phoneRuleSet);
         phoneValidator.showMessage();
-
-        //Validate Birth date
-        Date now = new Date();
-        MessageLabelFactory messageBirthDateFactory = new MessageLabelFactory(lblValidateDate);
-        ValidationRuleNotNull dateNotNullRule = messageBirthDateFactory.createNotNullRule(birthDateAsbirtString, "Date cannot be null");
-        ValidationRuleMaximum dateMaxRule = messageBirthDateFactory.createMaximumRule(birthDate,now, "Date must be earlier than today");
-        ValidationRuleSet dateRuleSet = new ValidationRuleSet();
-        dateRuleSet.addRule(dateNotNullRule);
-        dateRuleSet.addRule(dateMaxRule);
-        Validator dateValidator = new Validator(dateRuleSet);
-        dateValidator.showMessage();
-
 
     }
 
