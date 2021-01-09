@@ -29,7 +29,7 @@ class FormGeek
   private String[] name = {"Username", "Password", "Email", "Phone number"};
 
   public FormGeek() {
-    setTitle("Registration Form");
+    setTitle("Validation Form");
     setBounds(300, 90, 900, 800);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setResizable(false);
