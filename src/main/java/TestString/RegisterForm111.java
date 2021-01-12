@@ -97,7 +97,7 @@ public class RegisterForm111 extends JFrame {
         // Validate phone
         MessageLabelFactory messagePhoneFactory = new MessageLabelFactory(lblValidatePhone);
         ValidationRulePattern phoneLengthRule = messagePhoneFactory.createPatternRule(phone, "\\b\\w{10,11}\\b", "Phone numbers length must be from 10 to 11 digits");
-        ValidationRulePattern containNumberRule = messagePhoneFactory.createPatternRule(phone, ContainsNumberValidationPattern.shared.getPattern(), "Phone number just contains numeric values");
+        ValidationRulePattern containNumberRule = messagePhoneFactory.createPatternRule(phone, ContainsNumberValidationPattern.createInstance().getPattern(), "Phone number just contains numeric values");
         ValidationRuleSet phoneRuleSet = new ValidationRuleSet();
         phoneRuleSet.addRule(phoneLengthRule);
         phoneRuleSet.addRule(containNumberRule);

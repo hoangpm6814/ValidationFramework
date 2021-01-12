@@ -33,7 +33,7 @@ public class TestStringDemo {
 //		String phone = "111111111h";
         MessageConsoleFactory messagePhoneFactory = new MessageConsoleFactory();
         ValidationRulePattern phoneLengthRule = messagePhoneFactory.createPatternRule(phone, "\\b\\w{10,11}\\b", "Phone numbers length must be 10 or 11 digits");
-        ValidationRulePattern containNumberRule = messagePhoneFactory.createPatternRule(phone, ContainsNumberValidationPattern.shared.getPattern(), "Phone number just contains numeric values");
+        ValidationRulePattern containNumberRule = messagePhoneFactory.createPatternRule(phone, ContainsNumberValidationPattern.createInstance().getPattern(), "Phone number just contains numeric values");
         ValidationRuleSet phoneRuleSet = new ValidationRuleSet();
         phoneRuleSet.addRule(phoneLengthRule);
         phoneRuleSet.addRule(containNumberRule);

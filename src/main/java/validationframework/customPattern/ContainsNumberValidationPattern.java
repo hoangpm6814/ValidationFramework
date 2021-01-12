@@ -2,10 +2,20 @@ package validationframework.customPattern;
 
 public class ContainsNumberValidationPattern implements ValidationPatterns {
     
-    public static ContainsNumberValidationPattern shared = new ContainsNumberValidationPattern();
+    private static ContainsNumberValidationPattern instance = null;
 
-    private ContainsNumberValidationPattern() {
-        
+    protected ContainsNumberValidationPattern() {
+
+    }
+
+    public static ContainsNumberValidationPattern createInstance()
+    {
+        if (instance == null)
+        {
+            instance = new ContainsNumberValidationPattern();
+            return instance;
+        }
+        return null;
     }
 
     public String getPattern() {
