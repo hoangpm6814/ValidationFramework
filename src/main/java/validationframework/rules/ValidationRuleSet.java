@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import static validationframework.rules.ValidationResult.inValid;
 import static validationframework.rules.ValidationResult.valid;
 
-public class ValidationRuleSet implements ValidationRuleInterface{
-    private ArrayList <ValidationRuleInterface> ruleSet;
+public class ValidationRuleSet extends AbstractValidationRule {
+    private ArrayList <AbstractValidationRule> ruleSet;
 
-    public ValidationRuleSet(ArrayList <ValidationRuleInterface> ruleSet) {
+    public ValidationRuleSet(ArrayList <AbstractValidationRule> ruleSet) {
         super();
         this.ruleSet = ruleSet;
     }
@@ -41,7 +41,7 @@ public class ValidationRuleSet implements ValidationRuleInterface{
             }
         }
     }
-    public void addRule(ValidationRuleInterface rule){
+    public void addRule(AbstractValidationRule rule){
         ruleSet.add(rule);
     }
 }

@@ -4,7 +4,6 @@ import validationframework.rules.ValidationResult;
 import static validationframework.rules.ValidationResult.inValid;
 import static validationframework.rules.ValidationResult.valid;
 import validationframework.rules.ValidationRule;
-import validationframework.rules.ValidationRuleInterface;
 
 public abstract class ValidationRuleNotNull extends  ValidationRule {
     protected String input;

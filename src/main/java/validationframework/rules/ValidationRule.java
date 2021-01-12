@@ -1,6 +1,6 @@
 package validationframework.rules;
 
-public abstract class ValidationRule implements ValidationRuleInterface{
+public abstract class ValidationRule extends AbstractValidationRule {
     protected String message;
 
     public abstract ValidationResult validate() ;

@@ -1,11 +1,10 @@
 package validationframework.validator;
 
 import validationframework.rules.ValidationResult;
-import validationframework.rules.ValidationRule;
-import validationframework.rules.ValidationRuleInterface;
+import validationframework.rules.AbstractValidationRule;
 
 public class Validator implements ValidatorInterface{
-    private ValidationRuleInterface validationRule;
+    private AbstractValidationRule validationRule;
 
     public void showMessage (){
         validationRule.showMessage();
@@ -15,7 +14,7 @@ public class Validator implements ValidatorInterface{
         return validationRule.validate();
     }
     
-    public Validator(ValidationRuleInterface validationRule){
+    public Validator(AbstractValidationRule validationRule){
        this.validationRule = validationRule; 
     }
 }
