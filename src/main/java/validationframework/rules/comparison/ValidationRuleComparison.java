@@ -36,8 +36,5 @@ public abstract class ValidationRuleComparison extends ValidationRule{
     return result ;
   }
 
-  @Override
-  public abstract void showMessage();
-
   protected abstract CompareOperator getRule();
 }

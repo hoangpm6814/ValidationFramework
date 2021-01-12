@@ -1,20 +1,21 @@
 package TestString;
 
+import validationframework.app.FormApp;
 import validationframework.customPattern.ContainsNumberValidationPattern;
 import validationframework.customPattern.EmailValidationPattern;
-import validationframework.messageType.label.MessageLabelFactory;
+import validationframework.rules.AbstractValidationRule;
 import validationframework.rules.ValidationRuleSet;
 import validationframework.rules.notNull.ValidationRuleNotNull;
 import validationframework.rules.pattern.ValidationRulePattern;
-import validationframework.validator.Validator;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-class FormGeek
+class FormAppTest
     extends JFrame
-    implements ActionListener {
+    implements ActionListener, FormApp {
 
   private Container container;
   private JLabel title;
@@ -28,7 +29,7 @@ class FormGeek
 
   private String[] name = {"Username", "Password", "Email", "Phone number"};
 
-  public FormGeek() {
+  public FormAppTest() {
     setTitle("Validation Form");
     setBounds(300, 90, 900, 800);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -106,36 +107,57 @@ class FormGeek
     String phone  = input[3].getText();
 
     //Validate username
-    MessageLabelFactory messageUsernameFactory = new MessageLabelFactory(validationResult[0]);
-    ValidationRuleNotNull notNullRule = messageUsernameFactory.createNotNullRule(username, "Username cannot be null");
-    Validator usernameValidator = new Validator (notNullRule);
-    usernameValidator.showMessage();
+//    MessageLabelFactory messageUsernameFactory = new MessageLabelFactory(validationResult[0]);
+//    ValidationRuleNotNull notNullRule = messageUsernameFactory.createNotNullRule(username, "Username cannot be null");
+//    Validator usernameValidator = new Validator (notNullRule);
+//    usernameValidator.showMessage();
+    ValidationRuleNotNull notNullRule = new ValidationRuleNotNull(username, "Username cannot be null");
+    showMessage(validationResult[0], notNullRule);
 
     //Validate password
-    MessageLabelFactory messagePasswordFactory = new MessageLabelFactory(validationResult[1]);
-    ValidationRulePattern passwordLengthRule = messagePasswordFactory.createPatternRule(password,"\\b\\w{5,10}\\b", "Password must be longer than 4 characters and less than 10 characters");
-    Validator passwordValidator = new Validator (passwordLengthRule);
-    passwordValidator.showMessage();
+//    MessageLabelFactory messagePasswordFactory = new MessageLabelFactory(validationResult[1]);
+//    ValidationRulePattern passwordLengthRule = messagePasswordFactory.createPatternRule(password,"\\b\\w{5,10}\\b", "Password must be longer than 4 characters and less than 10 characters");
+//    Validator passwordValidator = new Validator (passwordLengthRule);
+//    passwordValidator.showMessage();
+    ValidationRulePattern passwordLengthRule = new ValidationRulePattern(password, "\\b\\w{5,10}\\b","Password must be longer than 4 characters and less than 10 characters");
+    showMessage(validationResult[1], passwordLengthRule);
 
     // Validate email
-    MessageLabelFactory messageEmailFactory = new MessageLabelFactory(validationResult[2]);
-    ValidationRulePattern emailRule = messageEmailFactory.createPatternRule(email, EmailValidationPattern.simple.getPattern(), "Please type valid email");
-    Validator emailValidator = new Validator (emailRule);
-    emailValidator.showMessage();
+//    MessageLabelFactory messageEmailFactory = new MessageLabelFactory(validationResult[2]);
+//    ValidationRulePattern emailRule = messageEmailFactory.createPatternRule(email, EmailValidationPattern.simple.getPattern(), "Please type valid email");
+//    Validator emailValidator = new Validator (emailRule);
+//    emailValidator.showMessage();
+    ValidationRulePattern emailRule = new ValidationRulePattern(email, EmailValidationPattern.simple.getPattern(),"Please type valid email");
+    showMessage(validationResult[2], emailRule);
 
     // Validate phone
-    MessageLabelFactory messagePhoneFactory = new MessageLabelFactory(validationResult[3]);
-    ValidationRulePattern phoneLengthRule = messagePhoneFactory.createPatternRule(phone, "\\b\\w{10,11}\\b", "Phone numbers length must be from 10 to 11 digits");
-    ValidationRulePattern containNumberRule = messagePhoneFactory.createPatternRule(phone, ContainsNumberValidationPattern.createInstance().getPattern(), "Phone number just contains numeric values");
+//    MessageLabelFactory messagePhoneFactory = new MessageLabelFactory(validationResult[3]);
+//    ValidationRulePattern phoneLengthRule = messagePhoneFactory.createPatternRule(phone, "\\b\\w{10,11}\\b", "Phone numbers length must be from 10 to 11 digits");
+//    ValidationRulePattern containNumberRule = messagePhoneFactory.createPatternRule(phone, ContainsNumberValidationPattern.createInstance().getPattern(), "Phone number just contains numeric values");
+//    ValidationRuleSet phoneRuleSet = new ValidationRuleSet();
+//    phoneRuleSet.addRule(phoneLengthRule);
+//    phoneRuleSet.addRule(containNumberRule);
+//    Validator phoneValidator = new Validator (phoneRuleSet);
+//    phoneValidator.showMessage();
+
+    ValidationRulePattern phoneLengthRule = new ValidationRulePattern(phone, "\\b\\w{10,11}\\b","Phone numbers length must be from 10 to 11 digits");
+    ValidationRulePattern containNumberRule = new ValidationRulePattern(phone, ContainsNumberValidationPattern.createInstance().getPattern(),"Phone number just contains numeric values");
     ValidationRuleSet phoneRuleSet = new ValidationRuleSet();
     phoneRuleSet.addRule(phoneLengthRule);
     phoneRuleSet.addRule(containNumberRule);
-    Validator phoneValidator = new Validator (phoneRuleSet);
-    phoneValidator.showMessage();
+    showMessage(validationResult[3], phoneRuleSet);
 
   }
 
   public static void main(String[] args) throws Exception {
-    FormGeek f = new FormGeek();
+    FormAppTest f = new FormAppTest();
+  }
+
+  public void showMessage(JLabel label, AbstractValidationRule rule) {
+    if (rule.validate().isValid()){
+      label.setText("");
+    } else {
+      label.setText(rule.getMessage());
+    }
   }
 }

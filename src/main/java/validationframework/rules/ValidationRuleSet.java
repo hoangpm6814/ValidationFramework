@@ -33,14 +33,14 @@ public class ValidationRuleSet extends AbstractValidationRule {
         return message;
     }
 
-    public void showMessage(){
-        for (int i = 0 ; i < ruleSet.size(); i++){
-            ruleSet.get(i).showMessage();
-            if (ruleSet.get(i).validate() == inValid ){
-                break;
-            }
-        }
-    }
+//    public void showMessage(){
+//        for (int i = 0 ; i < ruleSet.size(); i++){
+//            ruleSet.get(i).showMessage();
+//            if (ruleSet.get(i).validate() == inValid ){
+//                break;
+//            }
+//        }
+//    }
     public void addRule(AbstractValidationRule rule){
         ruleSet.add(rule);
     }

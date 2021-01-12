@@ -5,7 +5,7 @@ import static validationframework.rules.ValidationResult.inValid;
 import static validationframework.rules.ValidationResult.valid;
 import validationframework.rules.ValidationRule;
 
-public abstract class ValidationRulePattern extends ValidationRule {
+public class ValidationRulePattern extends ValidationRule {
     
     protected String input;
     public String pattern;
@@ -23,7 +23,4 @@ public abstract class ValidationRulePattern extends ValidationRule {
         }
         return inValid;
     }
-
-    @Override
-    public abstract void showMessage();
 }

@@ -5,7 +5,7 @@ import static validationframework.rules.ValidationResult.inValid;
 import static validationframework.rules.ValidationResult.valid;
 import validationframework.rules.ValidationRule;
 
-public abstract class ValidationRuleNotNull extends  ValidationRule {
+public class ValidationRuleNotNull extends  ValidationRule {
     protected String input;
 
     public ValidationRuleNotNull(String input, String message) {
@@ -21,6 +21,4 @@ public abstract class ValidationRuleNotNull extends  ValidationRule {
 //        System.out.println(result);
         return result ;
     }
-    @Override 
-    public abstract void showMessage();
 }
