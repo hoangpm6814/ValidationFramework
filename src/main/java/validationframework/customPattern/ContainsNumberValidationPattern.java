@@ -15,7 +15,7 @@ public class ContainsNumberValidationPattern implements ValidationPatterns {
             instance = new ContainsNumberValidationPattern();
             return instance;
         }
-        return null;
+        return instance;
     }
 
     public String getPattern() {

@@ -1,4 +1,4 @@
-package validationframework.rules.comparison;
+package validationframework.rules.comparable;
 
 import validationframework.rules.ValidationResult;
 import static validationframework.rules.ValidationResult.*;
@@ -14,7 +14,8 @@ enum CompareOperator{
     return null;
   }
 }
-public abstract class ValidationRuleComparison extends ValidationRule{
+
+public abstract class ValidationRuleComparison extends ValidationRule <Comparable>{
   protected Comparable input;
   protected Comparable limiter;
 

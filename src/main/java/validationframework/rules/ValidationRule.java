@@ -1,6 +1,6 @@
 package validationframework.rules;
 
-public abstract class ValidationRule extends AbstractValidationRule {
+public abstract class ValidationRule <T> extends AbstractValidationRule {
     protected String message;
 
     public abstract ValidationResult validate() ;
@@ -16,5 +16,10 @@ public abstract class ValidationRule extends AbstractValidationRule {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
+    @Override
+    public void showMessage() {
+        abstractMessage.setValidator(this);
+        abstractMessage.showMessage();
+    }
 }

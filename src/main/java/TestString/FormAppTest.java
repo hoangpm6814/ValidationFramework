@@ -1,33 +1,62 @@
 package TestString;
 
-import validationframework.app.FormApp;
+import annatations.NotNull;
+import validationframework.app.FormMessage;
 import validationframework.customPattern.ContainsNumberValidationPattern;
-import validationframework.customPattern.EmailValidationPattern;
 import validationframework.rules.AbstractValidationRule;
-import validationframework.rules.ValidationRuleSet;
-import validationframework.rules.notNull.ValidationRuleNotNull;
-import validationframework.rules.pattern.ValidationRulePattern;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Wrapper;
+
+import lombok.Setter;
+import validationframework.rules.ValidationRule;
+import validationframework.rules.ValidationRuleSet;
+import validationframework.rules.string.pattern.ValidationRulePattern;
 
 class FormAppTest
     extends JFrame
-    implements ActionListener, FormApp {
+    implements ActionListener {
 
   private Container container;
   private JLabel title;
   private JButton submit;
   private JButton reset;
+
   private JLabel result;
 
   private JLabel[] labelName = new JLabel[4];
+
   private JTextField[] input = new JTextField[4];
+
+
   private JLabel[] validationResult  = new JLabel[4];
 
   private String[] name = {"Username", "Password", "Email", "Phone number"};
+
+  @Setter  private String username;
+  @Setter  private String password;
+  @Setter  private String email;
+  @Setter  private String phone;
+
+  @NotNull(message = "username cannot be null")
+  public String getUsername() {
+    return this.username;
+  }
+
+
+  public String getPassword() {
+    return this.password;
+  }
+
+  public String getEmail() {
+    return this.email;
+  }
+  public String getPhone() {
+    return this.phone;
+  }
 
   public FormAppTest() {
     setTitle("Validation Form");
@@ -101,56 +130,40 @@ class FormAppTest
   }
 
   public void validateInput(){
-    String username = input[0].getText();
-    String password = input[1].getText();
-    String email = input[2].getText();
-    String phone  = input[3].getText();
+    setUsername(input[0].getText());
+    setPhone(input[3].getText());
 
-    //Validate username
-//    MessageLabelFactory messageUsernameFactory = new MessageLabelFactory(validationResult[0]);
-//    ValidationRuleNotNull notNullRule = messageUsernameFactory.createNotNullRule(username, "Username cannot be null");
-//    Validator usernameValidator = new Validator (notNullRule);
-//    usernameValidator.showMessage();
-    ValidationRuleNotNull notNullRule = new ValidationRuleNotNull(username, "Username cannot be null");
-    showMessage(validationResult[0], notNullRule);
 
-    //Validate password
-//    MessageLabelFactory messagePasswordFactory = new MessageLabelFactory(validationResult[1]);
-//    ValidationRulePattern passwordLengthRule = messagePasswordFactory.createPatternRule(password,"\\b\\w{5,10}\\b", "Password must be longer than 4 characters and less than 10 characters");
-//    Validator passwordValidator = new Validator (passwordLengthRule);
-//    passwordValidator.showMessage();
-    ValidationRulePattern passwordLengthRule = new ValidationRulePattern(password, "\\b\\w{5,10}\\b","Password must be longer than 4 characters and less than 10 characters");
-    showMessage(validationResult[1], passwordLengthRule);
 
-    // Validate email
-//    MessageLabelFactory messageEmailFactory = new MessageLabelFactory(validationResult[2]);
-//    ValidationRulePattern emailRule = messageEmailFactory.createPatternRule(email, EmailValidationPattern.simple.getPattern(), "Please type valid email");
-//    Validator emailValidator = new Validator (emailRule);
-//    emailValidator.showMessage();
-    ValidationRulePattern emailRule = new ValidationRulePattern(email, EmailValidationPattern.simple.getPattern(),"Please type valid email");
-    showMessage(validationResult[2], emailRule);
+//    ValidationRuleSet ruleSet = new ValidationRuleSet();
+//    showMessage(validationResult[1], ruleSet);
 
-    // Validate phone
-//    MessageLabelFactory messagePhoneFactory = new MessageLabelFactory(validationResult[3]);
-//    ValidationRulePattern phoneLengthRule = messagePhoneFactory.createPatternRule(phone, "\\b\\w{10,11}\\b", "Phone numbers length must be from 10 to 11 digits");
-//    ValidationRulePattern containNumberRule = messagePhoneFactory.createPatternRule(phone, ContainsNumberValidationPattern.createInstance().getPattern(), "Phone number just contains numeric values");
-//    ValidationRuleSet phoneRuleSet = new ValidationRuleSet();
-//    phoneRuleSet.addRule(phoneLengthRule);
-//    phoneRuleSet.addRule(containNumberRule);
-//    Validator phoneValidator = new Validator (phoneRuleSet);
-//    phoneValidator.showMessage();
 
+//    ValidationRulePattern passwordLengthRule = new ValidationRulePattern(password, "\\b\\w{5,10}\\b","Password must be longer than 4 characters and less than 10 characters");
+//    passwordLengthRule.setAbstractMessage(new FormMessage(validationResult[1]));
+//    passwordLengthRule.showMessage();
+//
+//
+//    ValidationRulePattern emailRule = new ValidationRulePattern(email, EmailValidationPattern.simple.getPattern(),"Please type valid email");
+//    showMessage(validationResult[2], emailRule);
+//
     ValidationRulePattern phoneLengthRule = new ValidationRulePattern(phone, "\\b\\w{10,11}\\b","Phone numbers length must be from 10 to 11 digits");
     ValidationRulePattern containNumberRule = new ValidationRulePattern(phone, ContainsNumberValidationPattern.createInstance().getPattern(),"Phone number just contains numeric values");
     ValidationRuleSet phoneRuleSet = new ValidationRuleSet();
+    
     phoneRuleSet.addRule(phoneLengthRule);
     phoneRuleSet.addRule(containNumberRule);
-    showMessage(validationResult[3], phoneRuleSet);
+    phoneRuleSet.setAbstractMessage(new FormMessage(validationResult[3]));
+    phoneRuleSet.showMessage();
 
   }
 
   public static void main(String[] args) throws Exception {
     FormAppTest f = new FormAppTest();
+
+//    Wrapper wrapper = new Wrapper(f);
+//    List<ValidationRuleSet> = Wrapper.validate();
+
   }
 
   public void showMessage(JLabel label, AbstractValidationRule rule) {

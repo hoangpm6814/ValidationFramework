@@ -1,6 +1,6 @@
-package validationframework.rules.comparison;
+package validationframework.rules.comparable;
 
-import static validationframework.rules.comparison.CompareOperator.isBigger;
+import static validationframework.rules.comparable.CompareOperator.isBigger;
 
 public class ValidationRuleMinimum extends ValidationRuleComparison{
 

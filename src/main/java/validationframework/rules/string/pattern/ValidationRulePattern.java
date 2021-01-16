@@ -1,11 +1,11 @@
-package validationframework.rules.pattern;
+package validationframework.rules.string.pattern;
 
 import validationframework.rules.ValidationResult;
 import static validationframework.rules.ValidationResult.inValid;
 import static validationframework.rules.ValidationResult.valid;
 import validationframework.rules.ValidationRule;
 
-public class ValidationRulePattern extends ValidationRule {
+public class ValidationRulePattern extends ValidationRule <String> {
     
     protected String input;
     public String pattern;
