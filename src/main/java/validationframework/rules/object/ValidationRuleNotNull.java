@@ -12,7 +12,6 @@ public class ValidationRuleNotNull extends  ValidationRule {
         super(message);
         this.input = input;
     }
-
     @Override
     public ValidationResult validate(){
         boolean check = (input != null);

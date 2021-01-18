@@ -31,7 +31,7 @@ public class ValidationRuleMinLength extends ValidationRule <String> {
     }
     this.message = message;
     this.input = (String) data;
-
+    this.limiter = min;
   }
 
   @Override
