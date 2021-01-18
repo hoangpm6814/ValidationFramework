@@ -41,22 +41,11 @@ public class Validator extends AbstractValidationRule {
           String category = (String)annotationType.getMethod("category").invoke(annotation);
 
           if(category.equals("ValidationRule")) {
+            method.setAccessible(true);
+            Object data = method.invoke(object);
 
             Class<ValidationRule> validationRuleClass = (Class<ValidationRule>)annotationType.getMethod("validationRule").invoke(annotation);
-
-
-
-            String message = (String)annotationType.getMethod("message").invoke(annotation);
-            method.setAccessible(true);
-            Constructor<ValidationRule> constructor;
-            try {
-              constructor = validationRuleClass.getConstructor(method.getReturnType(), String.class);
-
-            } catch (NoSuchMethodException e) {
-              constructor = validationRuleClass.getConstructor(Object.class, String.class);
-            }
-
-            ValidationRule validationRule = constructor.newInstance(method.invoke(object), message);
+            ValidationRule validationRule = validationRuleClass.getConstructor(Annotation.class, Object.class).newInstance(annotation, data);
 
             methodRuleSet.addRule(validationRule);
 

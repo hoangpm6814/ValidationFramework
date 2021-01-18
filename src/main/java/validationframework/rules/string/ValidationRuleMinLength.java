@@ -4,26 +4,28 @@ import validationframework.rules.ValidationResult;
 import validationframework.rules.ValidationRule;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 
 import static validationframework.rules.ValidationResult.inValid;
 import static validationframework.rules.ValidationResult.valid;
 
-public class ValidationRuleNotEmpty extends ValidationRule <String> {
+public class ValidationRuleMinLength extends ValidationRule <String> {
   protected String input;
+  int limiter;
 
-  public ValidationRuleNotEmpty(String input, String message) {
+  public ValidationRuleMinLength(String input, int limiter, String message) {
     super(message);
     this.input = input;
-//        System.out.println(input);
+    this.limiter = limiter;
   }
-  public ValidationRuleNotEmpty(Annotation annotation, Object data) {
+  public ValidationRuleMinLength(Annotation annotation, Object data) {
     super("");
     Class<? extends Annotation> annotationType = annotation.annotationType();
 
     String message = "";
+    int min = 0;
     try {
       message = (String) annotationType.getMethod("message").invoke(annotation);
+      min = (int) annotationType.getMethod("min").invoke(annotation);
     } catch(Exception e) {
       System.out.println(e);
     }
@@ -31,9 +33,10 @@ public class ValidationRuleNotEmpty extends ValidationRule <String> {
     this.input = (String) data;
 
   }
+
   @Override
   public ValidationResult validate(){
-    boolean check = ((input != null) && (!"".equals(input)));
+    boolean check = ((input != null) && (input.length() >= limiter));
     ValidationResult result = (check == true) ? valid : inValid;
     return result ;
   }

@@ -1,9 +1,13 @@
 package validationframework.rules;
 
+import java.lang.annotation.Annotation;
+
 public abstract class ValidationRule <T> extends AbstractValidationRule {
     protected String message;
 
     public abstract ValidationResult validate() ;
+
+
     
     public ValidationRule(String message) {
         this.message = message;
@@ -22,4 +26,5 @@ public abstract class ValidationRule <T> extends AbstractValidationRule {
         abstractMessage.setValidator(this);
         abstractMessage.showMessage();
     }
+
 }
