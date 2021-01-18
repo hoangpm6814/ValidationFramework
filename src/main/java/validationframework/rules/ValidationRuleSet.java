@@ -1,5 +1,6 @@
 package validationframework.rules;
 
+import lombok.Getter;
 import validationframework.app.AbstractMessage;
 
 import java.util.ArrayList;
@@ -8,9 +9,9 @@ import static validationframework.rules.ValidationResult.inValid;
 import static validationframework.rules.ValidationResult.valid;
 
 public class ValidationRuleSet extends AbstractValidationRule {
+
+  @Getter
   private ArrayList<AbstractValidationRule> ruleSet;
-  private Class<?> clazz;
-  private AbstractMessage abstractionApp;
 
   public ValidationRuleSet(ArrayList<AbstractValidationRule> ruleSet) {
     super();
@@ -21,43 +22,6 @@ public class ValidationRuleSet extends AbstractValidationRule {
     super();
     ruleSet = new ArrayList();
   }
-
-//    public ValidationRuleSet(Object object) {
-//        this.clazz = object.getClass();
-//
-//        for (Method method : clazz.getDeclaredMethods()) {
-//
-//            Annotation annotation = method.getAnnotation(NotNull.class);
-//
-//            if(annotation == null)
-//                continue;
-//            Class<? extends Annotation> annotationType = annotation.annotationType();
-//
-//            try {
-//
-//                String category = (String)annotationType.getMethod("category").invoke(annotation);
-//
-//                if(category.equals("ValidationRule")) {
-//
-//                    Class<ValidationRuleNotNull> validationRuleClass = (Class<ValidationRuleNotNull>)annotationType.getMethod("validationRule").invoke(annotation);
-//                    String message = (String)annotationType.getMethod("message").invoke(annotation);
-//                    method.setAccessible(true);
-//                    ValidationRule validationRule = validationRuleClass.getConstructor(String.class, String.class).newInstance(method.invoke(object), message);
-////                    addRule(validationRule);
-//
-//                    System.out.println(method.getName());
-//                    if (validationRule.validate().isValid()){
-//                        System.out.println("valid");
-//                    } else {
-//                        System.out.println(validationRule.getMessage());
-//                    }
-//
-//                }
-//            }catch(Exception e) {
-//                System.out.println("error: " + e.getMessage());
-//            }
-//        }
-//    }
 
   public ValidationResult validate() {
     for (int i = 0; i < ruleSet.size(); i++) {

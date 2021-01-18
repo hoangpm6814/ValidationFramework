@@ -1,5 +1,6 @@
 package TestString;
 
+import annatations.NotEmpty;
 import annatations.NotNull;
 import validationframework.app.FormMessage;
 import validationframework.customPattern.ContainsNumberValidationPattern;
@@ -14,6 +15,8 @@ import java.sql.Wrapper;
 import lombok.Setter;
 import validationframework.rules.ValidationRule;
 import validationframework.rules.ValidationRuleSet;
+import validationframework.rules.Validator;
+import validationframework.rules.object.ValidationRuleNotNull;
 import validationframework.rules.string.pattern.ValidationRulePattern;
 
 class FormAppTest
@@ -41,6 +44,7 @@ class FormAppTest
   @Setter  private String email;
   @Setter  private String phone;
 
+  @NotEmpty(message = "username cannot be empty")
   @NotNull(message = "username cannot be null")
   public String getUsername() {
     return this.username;
@@ -129,32 +133,39 @@ class FormAppTest
     }
   }
 
-  public void validateInput(){
+  public void validateInput() {
     setUsername(input[0].getText());
+    setPassword(input[1].getText());
     setPhone(input[3].getText());
 
 
+
+    Validator validator = new Validator(this);
+
+    validator.validate();
+
+    validator.showMessage();
 
 //    ValidationRuleSet ruleSet = new ValidationRuleSet();
 //    showMessage(validationResult[1], ruleSet);
 
 
-//    ValidationRulePattern passwordLengthRule = new ValidationRulePattern(password, "\\b\\w{5,10}\\b","Password must be longer than 4 characters and less than 10 characters");
+//    ValidationRuleNotNull passwordLengthRule = new ValidationRuleNotNull(password,"Password must be longer than 4 characters and less than 10 characters");
 //    passwordLengthRule.setAbstractMessage(new FormMessage(validationResult[1]));
 //    passwordLengthRule.showMessage();
 //
 //
 //    ValidationRulePattern emailRule = new ValidationRulePattern(email, EmailValidationPattern.simple.getPattern(),"Please type valid email");
 //    showMessage(validationResult[2], emailRule);
+////
+//    ValidationRulePattern phoneLengthRule = new ValidationRulePattern(phone, "\\b\\w{10,11}\\b","Phone numbers length must be from 10 to 11 digits");
+//    ValidationRulePattern containNumberRule = new ValidationRulePattern(phone, ContainsNumberValidationPattern.createInstance().getPattern(),"Phone number just contains numeric values");
+//    ValidationRuleSet phoneRuleSet = new ValidationRuleSet();
 //
-    ValidationRulePattern phoneLengthRule = new ValidationRulePattern(phone, "\\b\\w{10,11}\\b","Phone numbers length must be from 10 to 11 digits");
-    ValidationRulePattern containNumberRule = new ValidationRulePattern(phone, ContainsNumberValidationPattern.createInstance().getPattern(),"Phone number just contains numeric values");
-    ValidationRuleSet phoneRuleSet = new ValidationRuleSet();
-    
-    phoneRuleSet.addRule(phoneLengthRule);
-    phoneRuleSet.addRule(containNumberRule);
-    phoneRuleSet.setAbstractMessage(new FormMessage(validationResult[3]));
-    phoneRuleSet.showMessage();
+//    phoneRuleSet.addRule(phoneLengthRule);
+//    phoneRuleSet.addRule(containNumberRule);
+//    phoneRuleSet.setAbstractMessage(new FormMessage(validationResult[3]));
+//    phoneRuleSet.showMessage();
 
   }
 

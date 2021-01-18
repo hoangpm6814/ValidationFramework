@@ -6,10 +6,10 @@ import validationframework.rules.ValidationRule;
 import static validationframework.rules.ValidationResult.inValid;
 import static validationframework.rules.ValidationResult.valid;
 
-public class ValidationNotEmpty extends ValidationRule <String> {
+public class ValidationRuleNotEmpty extends ValidationRule <String> {
   protected String input;
 
-  public ValidationNotEmpty(String input, String message) {
+  public ValidationRuleNotEmpty(String input, String message) {
     super(message);
     this.input = input;
 //        System.out.println(input);
